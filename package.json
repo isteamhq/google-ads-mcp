@@ -1,0 +1,53 @@
+{
+  "name": "@isteam/google-ads-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Google Ads — manage campaigns, keywords, ads, budgets, and reporting via AI agents",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "google-ads-mcp": "./bin/google-ads-mcp.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "google-ads",
+    "advertising",
+    "ppc",
+    "ai",
+    "llm",
+    "claude",
+    "model-context-protocol",
+    "campaign-management"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isteamhq/google-ads-mcp.git"
+  },
+  "homepage": "https://is.team",
+  "bugs": {
+    "url": "https://github.com/isteamhq/google-ads-mcp/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.0",
+    "google-ads-api": "^23.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md"
+  ]
+}
