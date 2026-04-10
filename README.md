@@ -117,6 +117,23 @@ Add to your MCP config (`.mcp.json` for Claude Code, or Claude Desktop settings)
 4. Apply for a [developer token](https://developers.google.com/google-ads/api/docs/get-started/dev-token) in your Google Ads account
 5. Generate a refresh token using the OAuth 2.0 flow
 
+## Rate Limits & Agent Safety
+
+Google Ads API enforces quotas at multiple levels:
+
+| Scope | Limit | Notes |
+|-------|-------|-------|
+| Requests per minute | 600 / min per customer | Cumulative across all methods |
+| Concurrent mutations | ~30 | Campaign/ad group/keyword writes |
+| Concurrent reports | 5 per customer ID | GAQL queries |
+| Daily operations | 10,000–100,000+ | Depends on account tier and history |
+
+**Retry behavior:** The underlying `google-ads-api` library includes built-in exponential backoff for `429` and `5xx` errors. No additional retry configuration needed.
+
+**Idempotency note:** Most mutation operations (create campaign, add keywords) are **not** idempotent — retrying a create may produce duplicates. Use `list_campaigns` or `list_keywords` to verify before retrying. Google Ads API supports idempotency keys via request headers for advanced use cases.
+
+**Backoff:** On `429 Too Many Requests`, the library automatically retries with exponential delay (2^n seconds).
+
 ## Usage Examples
 
 **Check campaign performance:**
